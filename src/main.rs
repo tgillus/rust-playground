@@ -1,15 +1,15 @@
-fn last(list: &[i32]) -> Option<&i32> {
+fn last(list: &[i32]) -> Option<i32> {
     match list {
         [] => None,
-        [x] => Some(x),
+        [x] => Some(*x),
         [_, rest @ ..] => last(rest),
     }
 }
 
-fn last_two(list: &[i32]) -> Option<(&i32, &i32)> {
+fn last_two(list: &[i32]) -> Option<(i32, i32)> {
     match list {
         [] | [_] => None,
-        [x, y] => Some((x, y)),
+        [x, y] => Some((*x, *y)),
         [_, rest @ ..] => last_two(rest),
     }
 }
