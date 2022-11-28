@@ -8,8 +8,7 @@ fn last(list: &[i32]) -> Option<&i32> {
 
 fn last_two(list: &[i32]) -> Option<(&i32, &i32)> {
     match list {
-        [] => None,
-        [_] => None,
+        [] | [_] => None,
         [x, y] => Some((x, y)),
         [_, rest @ ..] => last_two(rest),
     }
