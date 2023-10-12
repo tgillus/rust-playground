@@ -1,64 +1,37 @@
-fn last(list: &[i32]) -> Option<i32> {
-    match list {
-        [] => None,
-        [x] => Some(*x),
-        [_, rest @ ..] => last(rest)
-    }
-}
-
-fn last_two(list: &[i32]) -> Option<(i32, i32)> {
-    match list {
-        [] | [_] => None,
-        [x, y] => Some((*x, *y)),
-        [_, rest @ ..] => last_two(rest)
-    }
-}
-
-fn at(list: &[i32], n: i32) -> Option<i32> {
-    let tuple = (list, n);
-
-    match tuple {
-        ([], _) => None,
-        ([first, _rest @ ..], 0) => Some(*first),
-        ([_, rest @ ..], _) => at(rest, n - 1)
-    }
-}
-
-fn length(list: &[i32]) -> i32 {
-    fn count(list: &[i32], acc: i32) -> i32 {
-        match list {
-            [] => acc,
-            [_, rest @ ..] => count(rest, acc + 1)
-        }
-    }
-
-    count(list, 0)
-}
-
 fn main() {
-    println!("{:?}", last(&[]) == None);
-    println!("{:?}", last(&[1]) == Some(1));
-    println!("{:?}", last(&[1, 2]) == Some(2));
-    println!("{:?}", last(&[1, 2, 3]) == Some(3));
+    basics();
+}
 
-    println!("{:?}", last_two(&[]) == None);
-    println!("{:?}", last_two(&[1]) == None);
-    println!("{:?}", last_two(&[1, 2]) == Some((1, 2)));
-    println!("{:?}", last_two(&[1, 2, 3]) == Some((2, 3)));
+fn basics() {
+    let mut sum = 0.0;
+    for i in 0..5 {
+        let even_or_odd = match i % 2 {
+            0 => "even",
+            _ => "odd",
+        };
+        println!("{} is {}", i, even_or_odd);
+        sum += i as f64;
+    }
+    println!("sum is {}", sum);
 
-    println!("{:?}", at(&[], 0) == None);
-    println!("{:?}", at(&[1], 0) == Some(1));
-    println!("{:?}", at(&[1], 1) == None);
-    println!("{:?}", at(&[1, 2], 0) == Some(1));
-    println!("{:?}", at(&[1, 2], 1) == Some(2));
-    println!("{:?}", at(&[1, 2], 2) == None);
-    println!("{:?}", at(&[1, 2, 3], 0) == Some(1));
-    println!("{:?}", at(&[1, 2, 3], 1) == Some(2));
-    println!("{:?}", at(&[1, 2, 3], 2) == Some(3));
-    println!("{:?}", at(&[1, 2, 3], 3) == None);
+    fn square(x: f64) -> f64 {
+        x * x
+    }
+    println!("square is {}", square(2.0));
 
-    println!("{:?}", length(&[]) == 0);
-    println!("{:?}", length(&[1]) == 1);
-    println!("{:?}", length(&[1, 2]) == 2);
-    println!("{:?}", length(&[1, 2, 3]) == 3);
+    fn by_ref(num: &i32) -> i32 {
+        *num + 1
+    }
+    let x = 10;
+    let result = by_ref(&x);
+    println!("{}", result);
+    let result = by_ref(&41);
+    println!("{}", result);
+
+    fn modifies(num: &mut f64) {
+        *num = 1.0;
+    }
+    let mut result = 0.0;
+    modifies(&mut result);
+    println!("{}", result);
 }
