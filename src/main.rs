@@ -218,7 +218,7 @@ fn strings() {
 
     let multilingual = "Hi! ¡Hola! привет!";
     for ch in multilingual.chars() {
-        println!("'{}'", ch);
+        print!("'{}'", ch);
     }
     println!("");
     println!("len {}", multilingual.len());
