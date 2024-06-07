@@ -47,10 +47,10 @@ fn sum() {
     println!("Sum is {}", sum);
 
     let sum: i32 = (0..5).sum();
-    println!("Sum is {}",  sum);
+    println!("Sum is {}", sum);
 
     let sum: i64 = [10, 20, 30].iter().sum();
-    println!("Sum is {}",  sum);
+    println!("Sum is {}", sum);
 }
 
 fn square() {
@@ -128,7 +128,7 @@ fn options() {
     for n in slice.windows(2) {
         println!("window {:?}", n);
     }
-    
+
     for n in slice.chunks(2) {
         println!("chunk {:?}", n);
     }
