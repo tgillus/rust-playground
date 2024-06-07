@@ -1,5 +1,18 @@
 use std::f64::consts;
 
+use address::address;
+
+use crate::fibonacci::fib;
+use crate::iterators::iterators;
+use crate::overflow::interproduct;
+use crate::swap::swap;
+
+mod address;
+mod fibonacci;
+mod iterators;
+mod overflow;
+mod swap;
+
 fn main() {
     iterators();
     sum();
@@ -13,29 +26,16 @@ fn main() {
     options();
     vectors();
     strings();
-}
+    structs();
 
-fn iterators() {
-    for i in 0..5 {
-        let even_odd = if i % 2 == 0 { "even" } else { "odd" };
-        println!("{} {}", i, even_odd);
-    }
+    let x = 10;
+    println!("x is {x}");
 
-    let mut iter = 0..3;
-    println!("iter is {:?}", iter.next());
-    println!("iter is {:?}", iter.next());
-    println!("iter is {:?}", iter.next());
-    println!("iter is {:?}", iter.next());
+    println!("{}", interproduct(120, 100, 248));
+    println!("{}", fib(20));
 
-    let arr = [10, 20, 30];
-    for n in arr.iter() {
-        println!("{}", n);
-    }
-
-    let slice = arr;
-    for n in slice {
-        println!("{}", n);
-    }
+    swap();
+    address();
 }
 
 fn sum() {
@@ -229,4 +229,23 @@ fn strings() {
         let hi = &multilingual[maybe.unwrap()..];
         println!("Russian hi {}", hi);
     }
+}
+
+fn structs() {
+    struct User {
+        name: String,
+        power: i64,
+    }
+
+    impl User {
+        fn new(name: &str, power: i64) -> User {
+            User {
+                name: name.to_string(),
+                power,
+            }
+        }
+    }
+
+    let user = User::new("Goku", 9001);
+    println!("{}'s power is {}", user.name, user.power);
 }
